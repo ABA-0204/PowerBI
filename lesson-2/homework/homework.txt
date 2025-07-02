@@ -1,0 +1,69 @@
+1. List three data sources Power BI can connect to.
+Excel, csv
+
+SQL Server Database
+
+Web API (JSON or XML feeds)
+
+2. What is the first step to import data into Power BI Desktop?
+ "Home" > "Get Data" and select your desired data source (e.g., Excel, CSV, SQL, etc.).
+
+3. How do you refresh imported data in Power BI?
+  “Home” > “Refresh” or right-click on a dataset in the Fields pane and select “Refresh Data”.
+
+4. What file formats can Power BI import directly? (Name two.)
+.csv (Comma-Separated Values)
+
+.xlsx (Excel Workbook)
+
+5. What does the "Navigator" window show after selecting a data source?
+It displays the tables, sheets, or data objects available in the selected source, allowing you to preview and choose what to load.
+
+6. Import Sales_Data.csv and load only the "Product" and "Price" columns.
+ Home > Get Data > Text/CSV
+
+Select Sales_Data.csv
+
+In the Navigator, click "Transform Data"
+
+In Power Query, select only the "Product" and "Price" columns
+
+Click "Close & Load"
+
+7. How would you change OrderDate to a date format during import?
+In Power Query Editor:
+Select the OrderDate column → click Data Type icon → choose Date
+
+8. What is the difference between "Load" and "Transform Data" in the import dialog?
+Load: Imports the data as-is into Power BI
+
+Transform Data: Opens Power Query to clean or modify the data before loading
+
+9. Why might you see an error when connecting to a SQL database? (Name one reason.)
+Incorrect login credentials or lack of database permissions
+
+10. How do you replace a data source after importing it?
+Go to Home > Transform Data > Data Source Settings, select the source, click Change Source, and update the file path or server info.
+
+11. Write the M-code to import only rows where Quantity > 1.
+
+12. How would you change the data source if Sales_Data.csv changed?
+Go to Transform Data > Data Source Settings, click Change Source, and select the new or updated file.
+
+13. Troubleshoot: Your CSV import fails due to a "mixed data type" error—how do you fix it?
+In Power Query, explicitly set a consistent data type for the affected column using Transform > Data Type, or replace errors with nulls if needed.
+
+14. Connect to a live SQL database with parameters (e.g., filter by year).
+Go to Home > Get Data > SQL Server
+
+Enter server/database name
+
+Click Advanced options, enter SQL query with parameter (e.g., SELECT * FROM Sales WHERE YEAR(OrderDate) = @Year)
+
+Define parameter in Power Query: Manage Parameters
+
+Bind the parameter to the query using M-code
+
+15. How would you automate data imports using Power BI and Power Automate?
+
+
