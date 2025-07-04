@@ -1,0 +1,45 @@
+1.	What is the purpose of the "Applied Steps" pane in Power Query?
+o	It shows a list of every transformation applied to your data, in order. You can review, edit, delete, or reorder steps here.
+2.	How do you remove duplicate rows in Power Query?
+o	Select the columns to check for duplicates → Go to Home tab → Click Remove Rows → Remove Duplicates.
+3.	What does the "Filter" icon do in Power Query?
+o	It lets you filter rows by specific values, ranges, text conditions, or date filters (similar to Excel filtering).
+4.	How would you rename a column from "CustID" to "CustomerID"?
+o	Right-click on the column header → Select Rename → Type CustomerID.
+5.	What happens if you click "Close & Apply" in Power Query?
+o	It applies all transformations and loads the cleaned data back into Power BI.
+________________________________________
+🧹 Data Cleaning and Transformation
+6.	Remove all rows where Quantity is less than 2:
+o	Filter the Quantity column → Choose "is greater than or equal to 2".
+7.	Split the OrderDate column into "Year", "Month", and "Day":
+o	Select OrderDate → Go to Add Column → Date → Select Year, Month, and Day.
+8.	Replace all "Mouse" entries in the Product column with "Computer Mouse":
+o	Right-click Product column → Replace Values → Find "Mouse" and replace with "Computer Mouse".
+9.	Sort the table by OrderDate (newest first):
+o	Click dropdown on OrderDate column → Sort descending.
+10.	How would you handle null values in the Price column?
+o	Replace with 0: Right-click Price → Replace Values → Replace null with 0
+o	Or remove rows: Use Remove Rows → Remove Blank Rows
+________________________________________
+✍️ Advanced Transformations and M-code
+11.	Write custom M-code to add a column calculating TotalSpent = Quantity * Price:
+Table.AddColumn(PreviousStep, "TotalSpent", each [Quantity] * [Price])
+12.	Group the table by CustID to show total spending per customer:
+•	Go to Home → Group By
+o	Group by: CustID
+o	New column name: TotalSpending
+o	Operation: Sum
+o	Column: TotalSpent
+13.	Fix inconsistent date formats in OrderDate:
+•	Convert OrderDate to Date type:
+o	Select column → Transform → Data Type → Date
+o	Power Query will auto-parse if format is valid.
+14.	Create a conditional column: Label orders as "High Value" if Price > 100:
+•	Go to Add Column → Conditional Column
+o	If Price > 100 then "High Value" else "Normal"
+15.	Optimize the query to reduce refresh time (e.g., remove unused columns early):
+•	Remove unneeded columns immediately after loading data using Remove Columns.
+•	Avoid steps like sorting or grouping before filtering.
+•	Minimize use of custom columns that require heavy calculations.
+
