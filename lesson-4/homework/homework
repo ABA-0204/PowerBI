@@ -1,0 +1,73 @@
+🔁 Merge vs. Append
+•	Merge: Combines columns from two tables based on matching keys (like SQL joins).
+➤ Example: Merge Orders and Customers on CustID.
+•	Append: Combines rows from two or more tables with the same structure (columns).
+➤ Example: Append Orders_Jan and Orders_Feb.
+________________________________________
+👥 Split "Full Name" into "First Name" and "Last Name"
+1.	Select the Full Name column.
+2.	Go to Home → Split Column → By Delimiter.
+3.	Choose Space as the delimiter.
+4.	Result: Two columns (e.g., Full Name.1 and Full Name.2).
+________________________________________
+🔄 Pivot Columns
+•	Transforms rows into columns.
+•	Used when you want to aggregate values based on categories.
+🧠 Example:
+Pivot Product column with Quantity as values to get total quantity per product.
+________________________________________
+↩️ Undo a Step
+•	In Applied Steps pane, click the "X" beside the step you want to remove.
+________________________________________
+📄 Reference vs. Duplicate
+•	Duplicate: Creates a copy of the entire query (independent).
+•	Reference: Creates a linked version that depends on the original query (changes to original affect the reference).
+________________________________________
+🔗 Merge Orders.csv and Customers.xlsx on CustID (Inner Join)
+1.	Load both queries.
+2.	Select Orders, go to Home → Merge Queries.
+3.	Select Customers, choose CustID in both.
+4.	Join kind: Inner Join.
+________________________________________
+📊 Pivot Product Column to Show Total Quantity
+1.	Select Product column.
+2.	Go to Transform → Pivot Column.
+3.	Values column: Select Quantity.
+4.	Aggregate: Sum.
+________________________________________
+➕ Append Two Tables (Orders_Jan + Orders_Feb)
+1.	Load both tables.
+2.	Go to Home → Append Queries.
+3.	Choose Orders_Jan and Orders_Feb.
+4.	Result: Combined rows in one query.
+________________________________________
+⬇️ Use Fill Down on Email Column
+1.	Select Email column.
+2.	Go to Transform → Fill → Down.
+o	Fills null values with the last non-null value above.
+________________________________________
+📧 Extract Domain from Email
+1.	Select the Email column.
+2.	Go to Add Column → Extract → Text After Delimiter.
+3.	Enter @ as the delimiter.
+o	Extracts everything after the @.
+________________________________________
+________________________________________
+🔄 Unpivot Monthly Sales Columns
+Given columns: Jan_Sales, Feb_Sales, etc.
+Steps:
+1.	Select those month columns.
+2.	Go to Transform → Unpivot Columns.
+3.	Rename:
+o	Attribute → Month
+o	Value → Sales
+________________________________________
+________________________________________
+☎️ Function to Clean Phone Numbers
+m
+let CleanPhone = (phone as text) as text =>
+    Text.Select(phone, {"0".."9"})
+in
+    CleanPhone
+➤ Removes non-digit characters like dashes, spaces, or brackets.
+
