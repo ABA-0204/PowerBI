@@ -1,0 +1,137 @@
+ Three Types of Visuals in Power BI
+Bar/Column Charts – For comparing categories.
+
+Line Charts – For trends over time.
+
+Pie/Donut Charts – For showing proportions.
+
+(Also popular: Tables, Cards, Maps, Scatter charts.)
+
+🎚️ Add a Slicer to a Report
+Go to Visualizations pane.
+
+Click the Slicer icon (filter-like icon).
+
+Drag a field (e.g., Quarter) into the Values well.
+
+Resize or style as needed.
+
+📏 Bar Chart vs. Column Chart
+Bar Chart: Horizontal bars (better for long category names).
+
+Column Chart: Vertical bars (better for time-based data).
+
+🎨 Change the Background Color of a Visual
+Select the visual.
+
+Go to Format (paint roller icon).
+
+Expand Background.
+
+Turn it On and select a color.
+
+🔽 What Does "Drill-Down" Mean?
+Allows users to explore data hierarchies (e.g., from Region → Product → Quarter).
+
+Can be enabled using:
+
+The arrow icons on the top-left of the visual.
+
+Clicking on the data point while holding Ctrl + Click.
+
+📊 Create a Bar Chart: SalesAmount by Region
+Select the Bar Chart visual.
+
+Drag Region to Axis.
+
+Drag SalesAmount to Values.
+
+Optional: Format → Turn on Data Labels.
+
+📅 Add a Slicer for Quarter (Filter All Visuals)
+Add a slicer visual.
+
+Drag Quarter field to Values.
+
+To affect all visuals:
+
+Slicer will auto-filter visuals on the same page (if model relationships exist).
+
+🏷️ Format the Bar Chart to Show Data Labels
+Select the chart.
+
+Go to Format pane.
+
+Expand Data Labels, turn it On.
+
+Customize font size, color, position if needed.
+
+📈 Use Line Chart to Show SalesAmount Over Quarters
+Insert Line Chart.
+
+Drag Quarter to Axis.
+
+Drag SalesAmount to Values.
+
+🖱️ Add Tooltip to Show Product Details on Hover
+Create a tooltip page:
+
+Add a new page → Set Page Information → Tooltip = On.
+
+Add visuals (e.g., table of Product info).
+
+Set Page Size → Tooltip under Format pane.
+
+On your main visual:
+
+Go to Format → Tooltip → Choose Report Page.
+
+Select the tooltip page you just made.
+
+🔁 Sync Slicers Across Pages
+Select slicer → Go to View → Sync Slicers.
+
+A pane opens—check the pages where the slicer should sync.
+
+Choose whether to sync and/or make visible.
+
+⚡ Create a Custom Visual with Dynamic Measure Selection (Sales vs. Profit)
+Create a table of measures:
+
+DAX
+
+Metrics = DATATABLE("Measure", STRING, {{"Sales"}, {"Profit"}})
+Create a slicer using Metrics[Measure].
+
+Create a dynamic measure:
+
+DAX
+
+SelectedMetric =
+SWITCH(
+    SELECTEDVALUE(Metrics[Measure]),
+    "Sales", [Total Sales],
+    "Profit", [Total Profit]
+)
+Use SelectedMetric in your visuals.
+
+🧭 Implement Hierarchy: Region > Product > Quarter Drill-Down
+In Fields pane, drag Product under Region, and Quarter under Product to create a hierarchy.
+
+Add hierarchy to visual’s axis.
+
+Use drill icons (expand all / go to next level).
+
+📚 Use Bookmarks to Toggle Between Two Visuals
+Add two visuals in the same position (e.g., Line chart & Bar chart).
+
+Create two Bookmarks:
+
+One with Visual 1 shown, Visual 2 hidden.
+
+One with Visual 2 shown, Visual 1 hidden.
+
+Add Buttons and assign actions via Action → Bookmark.
+
+🚀 
+
