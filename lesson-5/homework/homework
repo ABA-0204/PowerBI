@@ -1,0 +1,95 @@
+What is a Primary Key in a Table?
+•	A primary key is a unique identifier for each row in a table.
+•	Example: CustomerID in the Customers table — every customer has a unique ID.
+________________________________________
+🔗 Two Types of Table Relationships in Power BI
+1.	One-to-Many (1:*) – Most common
+➤ e.g., One customer can have many orders.
+2.	Many-to-Many (:) – Used when both sides have duplicate values (handled with bridge tables or composite models).
+________________________________________
+🔧 How to Create a Relationship Between Two Tables in Power BI
+1.	Go to Model view.
+2.	Drag a field (e.g., CustomerID) from one table to the matching field in another.
+3.	Or use Manage Relationships → New.
+4.	Choose the cardinality (1:*, :, etc.) and direction.
+________________________________________
+🌟 What is a Star Schema?
+•	A star schema consists of:
+o	A central Fact table (e.g., Sales).
+o	Surrounded by Dimension tables (e.g., Customers, Products, Dates).
+•	It looks like a star, and all dimensions directly relate to the fact table.
+________________________________________
+📦 Which Table Is Typically the Fact Table in Sales Data?
+•	Sales.csv is the fact table.
+o	Contains transactional data: OrderID, ProductID, CustomerID, Quantity, Price.
+________________________________________
+🔁 Link Sales.csv to Customers.csv Using CustomerID (One-to-Many)
+•	Customers[CustomerID] ➝ Primary key
+•	Sales[CustomerID] ➝ Foreign key
+•	Create a one-to-many relationship:
+o	Customers (1) → Sales (*)
+________________________________________
+❓ Why Is ProductID in Sales.csv a Foreign Key?
+•	It references the ProductID in the Products table.
+•	Enables the model to join product details (e.g., price, name) to each sale.
+________________________________________
+🛠️ Fix a Relationship Error Where ProductID Has Mismatched Data Types
+1.	In Power Query, convert both columns to the same data type (e.g., text or whole number).
+2.	Use Transform → Data Type.
+________________________________________
+🚀 Why Does a Star Schema Improve Performance?
+•	Keeps the model simple and efficient:
+o	Reduces table size (fewer joins).
+o	Improves DAX calculations and query folding.
+o	Easier for the VertiPaq engine to compress data and optimize storage.
+________________________________________
+➕ Add a New Column TotalSales in Sales (Quantity * Price from Products)
+Steps:
+1.	Ensure Sales is related to Products on ProductID.
+2.	Create a new column:
+dax
+TotalSales = Sales[Quantity] * RELATED(Products[Price])
+________________________________________
+🔁 Optimize a Model with Circular Relationships
+•	Avoid circular paths – Power BI will block them.
+Solutions:
+•	Remove or redesign one of the conflicting relationships.
+•	Use DAX measures (e.g., CALCULATE with TREATAS) instead of direct relationships.
+•	Consider using a bridge table to break the loop.
+________________________________________
+📅 Create a Role-Playing Dimension for OrderDate and ShipDate
+1.	Load a Date table (e.g., DimDate).
+2.	Create two relationships from Sales[OrderDate] and Sales[ShipDate] to DimDate[Date], but only one active.
+3.	Use USERELATIONSHIP() in DAX:
+dax
+ShipDateSales = CALCULATE([TotalSales], USERELATIONSHIP(Sales[ShipDate], DimDate[Date]))
+________________________________________
+🔄 Handle a Many-to-Many Relationship Between Customers and Products
+•	Problem: No direct one-to-many path exists.
+Solutions:
+•	Create a bridge table (e.g., CustomerProductBridge).
+•	Use it to connect both Customers and Products.
+•	Use DAX measures to calculate aggregations via the bridge.
+________________________________________
+🔁 Use Bidirectional Filtering Sparingly — When Is It Appropriate?
+•	Useful in lookup-to-lookup filtering via a fact table.
+Examples:
+•	Reporting scenarios where you want filter propagation both ways (e.g., filtering Customers filters Products and vice versa).
+Use carefully:
+•	Can cause performance issues or ambiguity.
+•	Instead, use single-direction filtering + DAX measures for more control.
+________________________________________
+🛡️ Write DAX to Enforce Referential Integrity if a CustomerID Is Deleted
+Check missing customers in Sales:
+dax
+MissingCustomers = 
+CALCULATE(
+    COUNTROWS(Sales),
+    ISBLANK(RELATED(Customers[CustomerID]))
+)
+Prevent issues:
+You could filter or flag such rows using:
+dax
+ValidSales = 
+IF(ISBLANK(RELATED(Customers[CustomerID])), BLANK(), Sales[Quantity])
+
