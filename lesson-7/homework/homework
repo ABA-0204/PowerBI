@@ -1,0 +1,30 @@
+The "Data/Model" view in Power BI serves two main purposes, and both are crucial for managing and understanding your data:
+________________________________________
+✅ 1. Data View
+•	Purpose:
+To inspect and explore your data after it's been loaded into Power BI.
+•	Key Features:
+o	View tables and their data row by row.
+o	See calculated columns, measures, and data types.
+o	Check for missing values or inconsistencies.
+o	Validate transformations applied in Power Query.
+•	Best Used For:
+Verifying data, debugging, and understanding what your dataset looks like.
+________________________________________
+✅ 2. Model View
+•	Purpose:
+To create and manage relationships between tables (data modeling).
+•	Key Features:
+o	Visualize tables and how they connect (like a database diagram).
+o	Define relationships (one-to-many, many-to-many).
+o	Set primary keys and foreign keys.
+o	Set table properties like “mark as date table”.
+o	Hide fields that shouldn't appear in the report.
+•	Best Used For:
+Structuring your data for correct aggregations and filtering in reports.
+________________________________________
+📌 Summary:
+View	Purpose	Use For
+Data View	View and verify table data	Check rows, calculated columns, quick audits
+Model View	Create/manage table relationships	Design data model, define table joins
+
